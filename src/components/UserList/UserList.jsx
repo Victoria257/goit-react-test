@@ -3,7 +3,7 @@ import css from './UserList.module.css';
 import Logo from 'assets/icons/logo.svg';
 import Icon from 'assets/icons/icon.png';
 import ELlipse from 'assets/icons/ellipse.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { incrementPage } from 'redux/slice';
 
 export const UsersList = () => {
@@ -13,21 +13,28 @@ export const UsersList = () => {
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
 
-  const followers = users.followers;
   const [nameButton, setNameButton] = useState({});
-  const [followersCount, setFollowersCount] = useState(followers);
+  const [followersCount, setFollowersCount] = useState({});
+  useEffect(() => {
+    if (users) {
+      const initialFollowersCount = users.reduce(
+        (acc, { id, followers }) => ({ ...acc, [id]: followers }),
+        {}
+      );
+      setFollowersCount(initialFollowersCount);
+    }
+  }, [users]);
 
-  const toggleClick = id => {
-    const newFollowersCount = nameButton[id]
-      ? followersCount - 1
-      : followersCount + 1;
-    setFollowersCount(newFollowersCount);
+  const toggleClick = ({ id, followers }) => {
+    setFollowersCount({
+      ...followersCount,
+      [id]: nameButton[id] ? followersCount[id] - 1 : followersCount[id] + 1,
+    });
 
     setNameButton({
       ...nameButton,
       [id]: !nameButton[id],
     });
-    console.log(id);
   };
 
   const handleLoadMore = () => {
@@ -74,11 +81,12 @@ export const UsersList = () => {
               <span>{formatter.format(tweets)}</span> Tweets
             </p>
             <p className={css.followers}>
-              <span>{formatter.format(followersCount)}</span> Followers
+              <span>{formatter.format(followersCount[id])}</span>
+              Followers
             </p>
             <button
               type="button"
-              onClick={() => toggleClick(id)}
+              onClick={() => toggleClick({ id, followers })}
               className={`${css.button} ${
                 nameButton[id] ? css.buttonFollowing : ''
               }`}
