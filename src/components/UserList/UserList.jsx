@@ -25,6 +25,11 @@ export const UsersList = () => {
     }
   }, [users]);
 
+  useEffect(() => {
+    localStorage.setItem('nameButton', JSON.stringify(nameButton));
+    localStorage.setItem('followersCount', JSON.stringify(followersCount));
+  }, [nameButton, followersCount]);
+
   const toggleClick = ({ id, followers }) => {
     setFollowersCount({
       ...followersCount,
