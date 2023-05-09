@@ -11,8 +11,18 @@ export const UsersList = () => {
   const formatter = new Intl.NumberFormat('en-US');
 
   const users = useSelector(state => state.users.users.items);
+  const hasNextPage = useSelector(state => state.users.users.hasNextPage);
+
+  const followers = users.followers;
   const [nameButton, setNameButton] = useState({});
+  const [followersCount, setFollowersCount] = useState(followers);
+
   const toggleClick = id => {
+    const newFollowersCount = nameButton[id]
+      ? followersCount - 1
+      : followersCount + 1;
+    setFollowersCount(newFollowersCount);
+
     setNameButton({
       ...nameButton,
       [id]: !nameButton[id],
@@ -64,7 +74,7 @@ export const UsersList = () => {
               <span>{formatter.format(tweets)}</span> Tweets
             </p>
             <p className={css.followers}>
-              <span>{formatter.format(followers)}</span> Followers
+              <span>{formatter.format(followersCount)}</span> Followers
             </p>
             <button
               type="button"
@@ -78,8 +88,12 @@ export const UsersList = () => {
           </li>
         ))}
       </ul>
-      {users && (
-        <button type="button" onClick={handleLoadMore}>
+      {users && hasNextPage && (
+        <button
+          className={`${css.button} ${css.buttonLoadMore}`}
+          type="button"
+          onClick={handleLoadMore}
+        >
           Load more..
         </button>
       )}

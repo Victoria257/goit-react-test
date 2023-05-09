@@ -6,10 +6,11 @@ import { fetchUsers } from '../../redux/operations';
 export const Users = () => {
   const dispatch = useDispatch();
   const page = useSelector(state => state.users.users.page);
+  const limit = useSelector(state => state.users.users.limit);
 
   useEffect(() => {
-    dispatch(fetchUsers(page));
-  }, [dispatch, page]);
+    dispatch(fetchUsers({ page, limit }));
+  }, [dispatch, page, limit]);
 
   return <UsersList />;
 };

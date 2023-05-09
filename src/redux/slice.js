@@ -12,7 +12,12 @@ const handleRejected = (state, action) => {
 const handleFulfilled = (state, action) => {
   state.users.isLoading = false;
   state.users.error = null;
-  state.users.items = action.payload;
+  if (state.users.page === 1) {
+    state.users.items = [...action.payload];
+  } else {
+    state.users.items = [...state.users.items, ...action.payload];
+  }
+  state.users.hasNextPage = action.payload.length >= state.users.limit;
 };
 
 const usersSlice = createSlice({
@@ -21,6 +26,8 @@ const usersSlice = createSlice({
     users: {
       items: [],
       page: 1,
+      hasNextPage: null,
+      limit: 3,
       isLoading: false,
       error: null,
     },
