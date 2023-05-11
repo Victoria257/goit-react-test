@@ -28,6 +28,7 @@ const usersSlice = createSlice({
       page: 1,
       hasNextPage: null,
       limit: 3,
+      // total: null,
       isLoading: false,
       error: null,
     },
@@ -42,6 +43,11 @@ const usersSlice = createSlice({
       .addCase(fetchUsers.pending, handlePending)
       .addCase(fetchUsers.rejected, handleRejected)
       .addCase(fetchUsers.fulfilled, handleFulfilled);
+    // .addCase(fetchUsersLength.fulfilled, (state, action) => {
+    //   state.users.total = action.payload;
+    // })
+    // .addCase(fetchUsersLength.pending, handlePending)
+    // .addCase(fetchUsersLength.rejected, handleRejected);
   },
 });
 

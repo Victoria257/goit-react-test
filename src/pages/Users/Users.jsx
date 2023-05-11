@@ -9,6 +9,7 @@ export const Users = () => {
   const limit = useSelector(state => state.users.users.limit);
 
   useEffect(() => {
+    // dispatch(fetchUsersLength());
     dispatch(fetchUsers({ page, limit }));
   }, [dispatch, page, limit]);
 

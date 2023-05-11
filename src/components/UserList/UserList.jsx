@@ -12,9 +12,15 @@ export const UsersList = () => {
 
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
+  // const total = useSelector(state => state.users.users.total);
+  // const limit = useSelector(state => state.users.users.limit);
+  // const page = useSelector(state => state.users.users.page);
+
+  // const lastPage = total / limit;
 
   const [nameButton, setNameButton] = useState({});
   const [followersCount, setFollowersCount] = useState({});
+
   useEffect(() => {
     if (users) {
       const initialFollowersCount = users.reduce(
