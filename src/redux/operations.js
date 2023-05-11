@@ -19,13 +19,14 @@ export const fetchUsers = createAsyncThunk(
   'users/fetchAll',
   async ({ page, limit }, thunkAPI) => {
     const params = {
-      completed: false,
+      // count: true,
+      // completed: false,
       page,
       limit,
     };
     try {
       const { data } = await axios.get(URL, { params });
-      return await data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

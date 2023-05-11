@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './UserList.module.css';
 import Logo from 'assets/icons/logo.svg';
-import Icon from 'assets/icons/icon.png';
 import ELlipse from 'assets/icons/ellipse.png';
 import { useEffect, useState } from 'react';
 import { incrementPage } from 'redux/slice';
@@ -66,10 +65,6 @@ export const UsersList = () => {
                 height={22}
               ></img>
             </div>
-            <div className={css.thumbIcon}>
-              <img src={Icon} alt="icon" width={308} height={168}></img>
-            </div>
-            <div className={css.line}></div>
             <img
               src={ELlipse}
               alt="ELlipse"
@@ -92,8 +87,7 @@ export const UsersList = () => {
               <span>{formatter.format(tweets)}</span> Tweets
             </p>
             <p className={css.followers}>
-              <span>{formatter.format(followersCount[id])}</span>
-              Followers
+              <span>{formatter.format(followersCount[id])}</span> Followers
             </p>
             <button
               type="button"
