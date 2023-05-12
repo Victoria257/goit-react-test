@@ -11,45 +11,16 @@ export const UsersList = () => {
 
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
-  // const total = useSelector(state => state.users.users.total);
-  // const limit = useSelector(state => state.users.users.limit);
-  // const page = useSelector(state => state.users.users.page);
-
-  // const lastPage = total / limit;
 
   const [nameButton, setNameButton] = useState({});
   const [followersCount, setFollowersCount] = useState({});
 
   useEffect(() => {
-    if (users.length > 0) {
-      localStorage.setItem('nameButton', JSON.stringify(nameButton));
-      localStorage.setItem('followersCount', JSON.stringify(followersCount));
-    }
-  }, [nameButton, followersCount, users.length]);
-
-  useEffect(() => {
-    if (users.length > 0) {
-      const count = JSON.parse(localStorage.getItem('followersCount')) || null;
-      const name = JSON.parse(localStorage.getItem('nameButton')) || null;
-      console.log(count);
-      console.log(name);
-      // console.log(users);
-      if (count) {
-        setFollowersCount(count);
-      } else {
-        const initialFollowersCount = users.reduce(
-          (acc, { id, followers }) => ({ ...acc, [id]: followers }),
-          {}
-        );
-        setFollowersCount(initialFollowersCount);
-      }
-
-      if (name) {
-        setNameButton(name);
-      } else {
-        setNameButton({ 1: false });
-      }
-    }
+    const initialFollowersCount = users.reduce(
+      (acc, { id, followers }) => ({ ...acc, [id]: followers }),
+      {}
+    );
+    setFollowersCount(initialFollowersCount);
   }, [users]);
 
   const toggleClick = id => {
