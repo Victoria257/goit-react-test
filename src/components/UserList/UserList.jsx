@@ -25,15 +25,12 @@ export const UsersList = () => {
       localStorage.setItem('nameButton', JSON.stringify(nameButton));
       localStorage.setItem('followersCount', JSON.stringify(followersCount));
     }
-  }, [nameButton, followersCount]);
+  }, [nameButton, followersCount, users.length]);
 
   useEffect(() => {
     if (users.length > 0) {
       const count = JSON.parse(localStorage.getItem('followersCount')) || null;
       const name = JSON.parse(localStorage.getItem('nameButton')) || null;
-      console.log(count);
-      console.log(name);
-      console.log(users);
       if (count) {
         setFollowersCount(count);
       } else {
@@ -52,7 +49,7 @@ export const UsersList = () => {
         setNameButton({ 1: false });
       }
     }
-  }, [users]);
+  }, [users.length]);
 
   const toggleClick = id => {
     setFollowersCount({
