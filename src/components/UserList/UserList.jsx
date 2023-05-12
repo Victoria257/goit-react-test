@@ -21,21 +21,40 @@ export const UsersList = () => {
   const [followersCount, setFollowersCount] = useState({});
 
   useEffect(() => {
-    if (users) {
-      const initialFollowersCount = users.reduce(
-        (acc, { id, followers }) => ({ ...acc, [id]: followers }),
-        {}
-      );
-      setFollowersCount(initialFollowersCount);
+    if (users.length > 0) {
+      localStorage.setItem('nameButton', JSON.stringify(nameButton));
+      localStorage.setItem('followersCount', JSON.stringify(followersCount));
+    }
+  }, [nameButton, followersCount]);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      const count = JSON.parse(localStorage.getItem('followersCount')) || null;
+      const name = JSON.parse(localStorage.getItem('nameButton')) || null;
+      console.log(count);
+      console.log(name);
+      console.log(users);
+      if (count) {
+        setFollowersCount(count);
+      } else {
+        const initialFollowersCount = users.reduce(
+          (acc, { id, followers }) => ({ ...acc, [id]: followers }),
+          {}
+        );
+        setFollowersCount(initialFollowersCount);
+      }
+
+      console.log(followersCount);
+
+      if (name) {
+        setNameButton(name);
+      } else {
+        setNameButton({ 1: false });
+      }
     }
   }, [users]);
 
-  useEffect(() => {
-    localStorage.setItem('nameButton', JSON.stringify(nameButton));
-    localStorage.setItem('followersCount', JSON.stringify(followersCount));
-  }, [nameButton, followersCount]);
-
-  const toggleClick = ({ id, followers }) => {
+  const toggleClick = id => {
     setFollowersCount({
       ...followersCount,
       [id]: nameButton[id] ? followersCount[id] - 1 : followersCount[id] + 1,
@@ -91,7 +110,7 @@ export const UsersList = () => {
             </p>
             <button
               type="button"
-              onClick={() => toggleClick({ id, followers })}
+              onClick={() => toggleClick(id)}
               className={`${css.button} ${
                 nameButton[id] ? css.buttonFollowing : ''
               }`}
