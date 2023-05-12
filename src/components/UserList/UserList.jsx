@@ -25,7 +25,7 @@ export const UsersList = () => {
       localStorage.setItem('nameButton', JSON.stringify(nameButton));
       localStorage.setItem('followersCount', JSON.stringify(followersCount));
     }
-  }, [nameButton, followersCount]);
+  }, [nameButton, followersCount, users.length]);
 
   useEffect(() => {
     if (users.length > 0) {
