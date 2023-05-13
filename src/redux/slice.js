@@ -32,10 +32,19 @@ const usersSlice = createSlice({
       isLoading: false,
       error: null,
     },
+    nameButton: {},
+    followersCount: {},
   },
   reducers: {
     incrementPage: state => {
       state.users.page += 1;
+    },
+    setNameButton: (state, action) => {
+      state.nameButton = action.payload;
+    },
+    setFollowersCount: (state, action) => {
+      const { id, count } = action.payload;
+      state.followersCount[id] = count;
     },
   },
   extraReducers: builder => {
@@ -51,5 +60,7 @@ const usersSlice = createSlice({
   },
 });
 
-export const { incrementPage } = usersSlice.actions;
+export const { incrementPage, setNameButton, setFollowersCount } =
+  usersSlice.actions;
+
 export default usersSlice.reducer;

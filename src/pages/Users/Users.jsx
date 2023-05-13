@@ -3,7 +3,7 @@ import { UsersList } from '../../components/UserList/UserList';
 import { useEffect } from 'react';
 import { fetchUsers } from '../../redux/operations';
 
-export const Users = () => {
+const Users = () => {
   const dispatch = useDispatch();
   const page = useSelector(state => state.users.users.page);
   const limit = useSelector(state => state.users.users.limit);
@@ -15,3 +15,5 @@ export const Users = () => {
 
   return <UsersList />;
 };
+
+export default Users;

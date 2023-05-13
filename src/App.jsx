@@ -1,7 +1,9 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Home } from './pages/Home/Home';
-import { Users } from './pages/Users/Users';
+import Users from './pages/Users/Users';
+
+// const Users = lazy(() => import('./pages/Users/Users'));
 
 function App() {
   return (

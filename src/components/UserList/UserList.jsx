@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './UserList.module.css';
 import Logo from 'assets/icons/logo.svg';
 import ELlipse from 'assets/icons/ellipse.png';
-import { useEffect, useState } from 'react';
-import { incrementPage } from 'redux/slice';
+import { useEffect } from 'react';
+import { incrementPage, setFollowersCount, setNameButton } from 'redux/slice';
 
 export const UsersList = () => {
   const dispatch = useDispatch();
@@ -11,28 +11,35 @@ export const UsersList = () => {
 
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
-
-  const [nameButton, setNameButton] = useState({});
-  const [followersCount, setFollowersCount] = useState({});
+  const nameButton = useSelector(state => state.users.nameButton);
+  const followersCount = useSelector(state => state.users.followersCount);
 
   useEffect(() => {
+    console.log(users);
     const initialFollowersCount = users.reduce(
       (acc, { id, followers }) => ({ ...acc, [id]: followers }),
       {}
     );
-    setFollowersCount(initialFollowersCount);
-  }, [users]);
+    console.log(users);
+    console.log(initialFollowersCount);
+    dispatch(setFollowersCount(initialFollowersCount));
+    console.log(followersCount);
+  }, [users, dispatch, followersCount]);
 
   const toggleClick = id => {
-    setFollowersCount({
-      ...followersCount,
-      [id]: nameButton[id] ? followersCount[id] - 1 : followersCount[id] + 1,
-    });
+    dispatch(
+      setFollowersCount({
+        ...followersCount,
+        [id]: nameButton[id] ? followersCount[id] - 1 : followersCount[id] + 1,
+      })
+    );
 
-    setNameButton({
-      ...nameButton,
-      [id]: !nameButton[id],
-    });
+    dispatch(
+      setNameButton({
+        ...nameButton,
+        [id]: !nameButton[id],
+      })
+    );
   };
 
   const handleLoadMore = () => {
@@ -75,7 +82,8 @@ export const UsersList = () => {
               <span>{formatter.format(tweets)}</span> Tweets
             </p>
             <p className={css.followers}>
-              <span>{formatter.format(followersCount[id])}</span> Followers
+              <span>{formatter.format(followersCount[id])}</span>
+              Followers
             </p>
             <button
               type="button"
