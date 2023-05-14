@@ -33,7 +33,6 @@ const usersSlice = createSlice({
       error: null,
     },
     nameButton: {},
-    followersCount: {},
   },
   reducers: {
     incrementPage: state => {
@@ -42,25 +41,15 @@ const usersSlice = createSlice({
     setNameButton: (state, action) => {
       state.nameButton = action.payload;
     },
-    setFollowersCount: (state, action) => {
-      const { id, count } = action.payload;
-      state.followersCount[id] = count;
-    },
   },
   extraReducers: builder => {
     builder
       .addCase(fetchUsers.pending, handlePending)
       .addCase(fetchUsers.rejected, handleRejected)
       .addCase(fetchUsers.fulfilled, handleFulfilled);
-    // .addCase(fetchUsersLength.fulfilled, (state, action) => {
-    //   state.users.total = action.payload;
-    // })
-    // .addCase(fetchUsersLength.pending, handlePending)
-    // .addCase(fetchUsersLength.rejected, handleRejected);
   },
 });
 
-export const { incrementPage, setNameButton, setFollowersCount } =
-  usersSlice.actions;
+export const { incrementPage, setNameButton } = usersSlice.actions;
 
 export default usersSlice.reducer;

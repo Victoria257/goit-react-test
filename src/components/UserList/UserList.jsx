@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './UserList.module.css';
 import Logo from 'assets/icons/logo.svg';
 import ELlipse from 'assets/icons/ellipse.png';
-import { useEffect } from 'react';
-import { incrementPage, setFollowersCount, setNameButton } from 'redux/slice';
+import { incrementPage, setNameButton } from 'redux/slice';
 
 export const UsersList = () => {
   const dispatch = useDispatch();
@@ -12,28 +11,8 @@ export const UsersList = () => {
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
   const nameButton = useSelector(state => state.users.nameButton);
-  const followersCount = useSelector(state => state.users.followersCount);
-
-  useEffect(() => {
-    console.log(users);
-    const initialFollowersCount = users.reduce(
-      (acc, { id, followers }) => ({ ...acc, [id]: followers }),
-      {}
-    );
-    console.log(users);
-    console.log(initialFollowersCount);
-    dispatch(setFollowersCount(initialFollowersCount));
-    console.log(followersCount);
-  }, [users, dispatch, followersCount]);
 
   const toggleClick = id => {
-    dispatch(
-      setFollowersCount({
-        ...followersCount,
-        [id]: nameButton[id] ? followersCount[id] - 1 : followersCount[id] + 1,
-      })
-    );
-
     dispatch(
       setNameButton({
         ...nameButton,
@@ -82,7 +61,11 @@ export const UsersList = () => {
               <span>{formatter.format(tweets)}</span> Tweets
             </p>
             <p className={css.followers}>
-              <span>{formatter.format(followersCount[id])}</span>
+              <span>
+                {nameButton[id]
+                  ? formatter.format(followers + 1)
+                  : formatter.format(followers)}
+              </span>{' '}
               Followers
             </p>
             <button
