@@ -3,6 +3,7 @@ import css from './UserList.module.css';
 import Logo from 'assets/icons/logo.svg';
 import ELlipse from 'assets/icons/ellipse.png';
 import { incrementPage, setNameButton } from 'redux/slice';
+import { NavLink } from 'react-router-dom';
 
 export const UsersList = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ export const UsersList = () => {
 
   return (
     <div>
+      <NavLink to="/" className={css.buttonContainer}>
+        <button className={` ${css.buttonBack} ${css.button}`}>Back</button>
+      </NavLink>
       <ul className={css.list}>
         {users.map(({ user, tweets, id, followers, avatar }) => (
           <li id={id} key={id} className={css.item}>

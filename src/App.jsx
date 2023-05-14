@@ -3,20 +3,18 @@ import './App.css';
 import { Home } from './pages/Home/Home';
 import Users from './pages/Users/Users';
 
-// const Users = lazy(() => import('./pages/Users/Users'));
-
 function App() {
   return (
     <>
       <div>
-        <nav>
+        {/* <nav>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/users">Users</NavLink>
-        </nav>
+          <NavLink to="/tweets">Tweets</NavLink>
+        </nav> */}
 
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/users" element={<Users />}></Route>
+          <Route path="/tweets" element={<Users />}></Route>
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>
       </div>
