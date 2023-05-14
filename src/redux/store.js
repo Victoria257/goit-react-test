@@ -15,6 +15,7 @@ import {
 const persistConfig = {
   key: 'users',
   storage,
+  blacklist: ['page'],
 };
 
 export const store = configureStore({
