@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './UserList.module.css';
+import css from './TweetsList.module.css';
 import Logo from 'assets/icons/logo.svg';
 import ELlipse from 'assets/icons/ellipse.png';
 import { incrementPage, setNameButton } from 'redux/slice';
 import { NavLink } from 'react-router-dom';
 
-export const UsersList = () => {
+export const TweetsList = () => {
   const dispatch = useDispatch();
   const formatter = new Intl.NumberFormat('en-US');
 
