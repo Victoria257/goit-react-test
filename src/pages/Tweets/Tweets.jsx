@@ -13,7 +13,11 @@ const Tweets = () => {
     dispatch(fetchUsers({ page, limit }));
   }, [dispatch, page, limit]);
 
-  return <TweetsList />;
+  return (
+    <div>
+      <TweetsList />;
+    </div>
+  );
 };
 
 export default Tweets;

@@ -4,6 +4,7 @@ import Logo from 'assets/icons/logo.svg';
 import ELlipse from 'assets/icons/ellipse.png';
 import { incrementPage, setNameButton } from 'redux/slice';
 import { NavLink } from 'react-router-dom';
+import FilterTweets from 'components/FilterTweets/FilterTweets';
 
 export const TweetsList = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,18 @@ export const TweetsList = () => {
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
   const nameButton = useSelector(state => state.users.nameButton);
+
+  const filterTweets = useSelector(state => state.filterTweets.filters);
+
+  const getVisibleUsers = () => {
+    if (filterTweets === 'Follow') {
+      return users.filter(({ id }) => nameButton[id] === true);
+    } else if (filterTweets === 'Followings') {
+      return users.filter(
+        ({ id }) => !nameButton[id] || nameButton[id] === !true
+      );
+    } else return users;
+  };
 
   const toggleClick = id => {
     dispatch(
@@ -28,11 +41,14 @@ export const TweetsList = () => {
 
   return (
     <div>
-      <NavLink to="/" className={css.buttonContainer}>
-        <button className={` ${css.buttonBack} ${css.button}`}>Back</button>
-      </NavLink>
+      <div className={css.container}>
+        <NavLink to="/">
+          <button className={` ${css.buttonBack} ${css.button}`}>Back</button>
+        </NavLink>
+        <FilterTweets />
+      </div>
       <ul className={css.list}>
-        {users.map(({ user, tweets, id, followers, avatar }) => (
+        {getVisibleUsers().map(({ user, tweets, id, followers, avatar }) => (
           <li id={id} key={id} className={css.item}>
             <div className={css.thumbLogo}>
               <img

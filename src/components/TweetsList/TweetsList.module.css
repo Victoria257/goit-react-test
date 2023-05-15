@@ -1,9 +1,9 @@
-.buttonContainer {
+.container {
   display: flex;
-  justify-content: left;
-  margin-left: 40px;
-  margin-bottom: 40px;
+  justify-content: space-between;
   text-decoration: none;
+  margin-bottom: 40px;
+  padding: 10px 40px;
 }
 
 .button.buttonBack {
@@ -16,6 +16,8 @@
 
   &:hover {
     width: 134px;
+    background-color: #5cd3a8;
+    color: #373737;
   }
 }
 
@@ -123,10 +125,14 @@
 }
 
 .buttonFollowing {
-  background: #5cd3a8;
+  background-color: #5cd3a8;
 }
 
 .buttonLoadMore {
   background-color: #5736a3;
   color: #ebd8ff;
+  &:hover {
+    background-color: #5cd3a8;
+    color: #373737;
+  }
 }
