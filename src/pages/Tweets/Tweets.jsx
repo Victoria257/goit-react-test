@@ -19,7 +19,7 @@ const Tweets = () => {
 
   return (
     <div>
-      <TweetsList />;
+      <TweetsList />
     </div>
   );
 };

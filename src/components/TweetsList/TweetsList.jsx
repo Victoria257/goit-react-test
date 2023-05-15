@@ -35,7 +35,7 @@ export const TweetsList = () => {
           type="button"
           onClick={handleLoadMore}
         >
-          Load more..
+          Load more...
         </button>
       )}
     </div>
