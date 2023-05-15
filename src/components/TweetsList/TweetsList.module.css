@@ -24,11 +24,18 @@
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-decoration: none;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   padding: 10px 40px;
+  border-bottom: solid 1px #5736a3;
 }
-
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 90px;
+  line-height: 22px;
+  color: #5736a3;
+}
 .button.buttonBack {
   padding: 11px;
   width: 130px;

@@ -21,6 +21,7 @@ export const TweetsList = () => {
         <NavLink to="/">
           <button className={` ${css.buttonBack} ${css.button}`}>Back</button>
         </NavLink>
+        <h1 className={css.title}>All your tweets</h1>
         <FilterTweets />
       </div>
       <ul className={css.list}>
