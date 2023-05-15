@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const filterTweetsSlice = createSlice({
   name: 'filters',
   initialState: {
-    filters: '',
+    filters: 'Show all',
   },
   reducers: {
     changeFilter(state, action) {

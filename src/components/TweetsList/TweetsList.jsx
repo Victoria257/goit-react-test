@@ -10,6 +10,8 @@ export const TweetsList = () => {
 
   const users = useSelector(state => state.users.users.items);
   const hasNextPage = useSelector(state => state.users.users.hasNextPage);
+  const filterTweets = useSelector(state => state.filterTweets.filters);
+  console.log(filterTweets);
 
   const handleLoadMore = () => {
     dispatch(incrementPage());
@@ -27,7 +29,7 @@ export const TweetsList = () => {
       <ul className={css.list}>
         <Tweet />
       </ul>
-      {users && hasNextPage && (
+      {users && hasNextPage && filterTweets === 'Show all' && (
         <button
           className={`${css.button} ${css.buttonLoadMore}`}
           type="button"
