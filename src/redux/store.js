@@ -16,6 +16,7 @@ import { filtersReducer } from './filterSlice';
 const persistConfig = {
   key: 'users',
   storage,
+  blacklist: ['page', 'prevPage'],
 };
 
 export const store = configureStore({
