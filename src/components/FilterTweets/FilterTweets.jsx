@@ -14,9 +14,9 @@ const FilterTweets = () => {
     <div className={css.dropdown}>
       <button className={css.dropButton}>Filter</button>
       <div className={css.dropdownContent} onClick={filter}>
-        <a href="#">Show all</a>
-        <a href="#">Follow</a>
-        <a href="#">Followings</a>
+        <span>Show all</span>
+        <span>Follow</span>
+        <span>Followings</span>
       </div>
     </div>
   );
