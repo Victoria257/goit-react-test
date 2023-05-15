@@ -31,6 +31,7 @@ const usersSlice = createSlice({
       isLoading: false,
       error: null,
     },
+    prevPage: 0,
     page: 1,
     nameButton: {},
   },
@@ -38,8 +39,14 @@ const usersSlice = createSlice({
     incrementPage: state => {
       state.page += 1;
     },
+    incrementPrevPage: (state, action) => {
+      state.prevPage = action.payload;
+    },
     setNameButton: (state, action) => {
       state.nameButton = action.payload;
+    },
+    setItems: (state, action) => {
+      state.users.items = action.payload;
     },
   },
   extraReducers: builder => {
@@ -50,6 +57,7 @@ const usersSlice = createSlice({
   },
 });
 
-export const { incrementPage, setNameButton } = usersSlice.actions;
+export const { incrementPage, incrementPrevPage, setNameButton, setItems } =
+  usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -1,9 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeFilter } from 'redux/filterSlice';
 import css from './FilterTweets.module.css';
 
 const FilterTweets = () => {
-  //   const filter = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
   const filter = event => {
